@@ -8,6 +8,7 @@
 		假设在高并发的场景下，每个线程执行一个请求，每个线程的执行时间都很短，这样就会频繁的进行线程的创建以及销毁，这样会严重影响系统的执行效率。可能会出现系统创建和销毁线程的花费的时间和消耗系统的资源比实际处理用户的请求的时间和资源还多。
 这样线程池的作用就体现出来了，通过对任务重用线程，把线程创建的分销被分摊到多个任务当中。
 线程池的使用场景：
+
 1. 单个任务处理的时间较短；
 2. 需要处理的任务数量多。
 
@@ -20,7 +21,7 @@
 
 Executor接口是线程池框架中最基础的部分，定义了一个用于执行Runnable的execute方法。如下图所示，Executor下有一个重要的子接口ExecutorService，其中定义了线程池的行为。
 
-![](E:\githubWork\JoneWangwz.github.io\image\20210322104836778.png)
+![](../image/20210322104836778.png)
 
 1. execute(Runnable command)：执行Runnable类型的任务。
 2. submit(Callable task)：用来提交Callable或Runnable任务，并返回Future对象。
