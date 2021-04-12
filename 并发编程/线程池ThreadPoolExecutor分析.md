@@ -28,7 +28,7 @@ Executor接口是线程池框架中最基础的部分，定义了一个用于执
 3. shutdown():在完成已提交的任务后封闭，不再接受新任务。
 4. shutdownNow()：停止正在执行的任务并封闭。
 5. isTerminated():测试是否所有的任务都已经完成。
-6. isShutdown():测试该ExecutorService已被关闭。
+6. isShutdown():测试该ExecutorService已被关闭。   
 
 ## 线程池属性
 
