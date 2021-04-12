@@ -86,7 +86,7 @@ TERMINATED
      4.workCount为0；
      5.设置TIDYING状态成功。
      
-     ![20210322160250194](E:\githubWork\JoneWangwz.github.io\image\20210322160250194.png)
+     ![](../image/20210322160250194.png)
      
      
 
@@ -105,7 +105,7 @@ public ThreadPoolExecutor(int corePoolSize,//核心线程数
     }
 ```
 
-![20210322162256543](E:\githubWork\JoneWangwz.github.io\image\20210322162256543.png)
+![](../image/20210322162256543.png)
 
 假设设置`corePoolSize = 4`，`maximumPoolSize=6`.
 1. 当一个`Task-1`开始执行`execute()`，此时会在`corePool`中创建一个线程`thread-1`，用于执行`task-1`，然后`task-2`执行，此时不管`thread-1`是否执行，都会重新创建线程`thread-2`用于执行`task-2`,直到当前线程数等于`corePoolSize`；
