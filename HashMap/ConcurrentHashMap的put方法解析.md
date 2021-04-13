@@ -6,7 +6,7 @@
 
 JDK1.7中引入Segment，Segment类通过继承ReentrantLock类，进行加锁，从而控制整个插入过程。
 Segment数组也是一种数组加链表的结构方式，每个segement[i]都有一把锁，当某对<key,value>想要进行插入操作，首先要找对应segment数组对应的index，并获取锁，才能对HashEntry进行操作。 
-![](E:\githubWork\JoneWangwz.github.io\image\20210313215706304.png)
+![](../image/20210313215706304.png)
 
 ```java
 public V put(K key, V value) {
@@ -161,13 +161,13 @@ final V putVal(K key, V value, boolean onlyIfAbsent) {
 
 ### 直接插入
 
-![](E:\githubWork\JoneWangwz.github.io\image\20210313215748435.png)
+![](../image/20210313215748435.png)
 
 在多线程中，通过使用synchronized加锁，实现同步。当前节点已存在数据，此时需要将key(a)设为`Node<K,V> f`，采用尾部插入法将key(c)插入到entry[1]中。
 
 ### 新创建表插入
 
-![](E:\githubWork\JoneWangwz.github.io\image\20210313204638955.png)
+![](../image/20210313204638955.png)
 
 第一步：当前concurrentHashMap为空时，需要进行表的初始化，假设线程T1抢到锁，首先创建大小为`DEFAULT_CAPACITY=16`的Node[]，第二轮循环，此时f指向key(a)要插入的地址，创建Node插入key(a)；
 第二步：此时线程T2要插入数据，恰好也是此位置，此时f指向key(a)，e指向key(a)，接着`Node<K,V> pred = e;`，pred指向key(a)；
