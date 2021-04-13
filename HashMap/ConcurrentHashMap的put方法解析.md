@@ -1,6 +1,6 @@
 # ConcurrentHashMap的put方法解析
 
-本文主要对ConcurrentHashMap的原理进行解析，主要是对比JDK1.7和JDK1.8的不同实现方式
+本文主要对ConcurrentHashMap的原理进行解析，主要是对比JDK1.7和JDK1.8的不同实现方式。
 
 ## JDK1.7put实现
 
