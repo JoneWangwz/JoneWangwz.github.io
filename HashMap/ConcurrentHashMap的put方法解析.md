@@ -2,7 +2,7 @@
 
 本文主要对ConcurrentHashMap的原理进行解析，主要是对比JDK1.7和JDK1.8的不同实现方式。
 
-## JDK1.7put实现
+## JDK1.7put实现 
 
 JDK1.7中引入Segment，Segment类通过继承ReentrantLock类，进行加锁，从而控制整个插入过程。
 Segment数组也是一种数组加链表的结构方式，每个segement[i]都有一把锁，当某对<key,value>想要进行插入操作，首先要找对应segment数组对应的index，并获取锁，才能对HashEntry进行操作。 
