@@ -12,7 +12,7 @@
 
 [ConcurrentHashMap的put方法解析](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/HashMap/ConcurrentHashMap%E7%9A%84put%E6%96%B9%E6%B3%95%E8%A7%A3%E6%9E%90.md)
 
- ### Redis
+### Redis
 
 [Redis持久化](https://github.com/JoneWangwz/JoneWangwz.github.io/tree/main/Redis/Redis%E6%8C%81%E4%B9%85%E5%8C%96.md)
 
