@@ -44,3 +44,4 @@ sentinel哨兵是特殊的redis服务，不提供读写服务，主要是用来�
 3. 如果master挂掉以后，哨兵集群会感应到，并选举出新的master，某个slave获得超过半数的sentinel支持，即为新的master。
 
  
+
