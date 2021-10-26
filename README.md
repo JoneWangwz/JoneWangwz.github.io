@@ -1,6 +1,6 @@
 ## 一个无名程序员的成长路
 
-写点笔记。多线程、HashMap、Redis。Loading...
+写点笔记。简单记录一下从算法转到开发的一些学习笔记，希望能够慢慢成长。
 
 ### 多线程
 
@@ -19,3 +19,14 @@
 [Redis主从架构](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/Redis/Redis%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84.md)
 
  
+
+### JVM内存模型
+
+[JVM类加载机制](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/JVM/JVM%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6.md)
+
+[JVM内存模型剖析和优化](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/JVM/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%89%96%E6%9E%90%E5%92%8C%E4%BC%98%E5%8C%96.md)
+
+### MySQL
+
+[Mysql索引底层数据结构与算法](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/Mysql/Mysql%E7%B4%A2%E5%BC%95%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95.md)
+
