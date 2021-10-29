@@ -10,15 +10,15 @@
 
 ### HashMap
 
+[HashMap扩容死锁](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/HashMap/HashMap%E6%89%A9%E5%AE%B9%E6%AD%BB%E9%94%81.md)
+
 [ConcurrentHashMap的put方法解析](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/HashMap/ConcurrentHashMap%E7%9A%84put%E6%96%B9%E6%B3%95%E8%A7%A3%E6%9E%90.md)
 
 ### Redis
 
 [Redis持久化](https://github.com/JoneWangwz/JoneWangwz.github.io/tree/main/Redis/Redis%E6%8C%81%E4%B9%85%E5%8C%96.md)
 
-[Redis主从架构](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/Redis/Redis%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84.md)
-
- 
+[Redis主从架构](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/Redis/Redis%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84.md) 
 
 ### JVM内存模型
 
