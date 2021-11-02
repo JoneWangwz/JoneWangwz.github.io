@@ -487,3 +487,143 @@ EXPLAIN SELECT name,age,position FROM employees WHERE name >'a' ORDER BY name;
 5.能用覆盖索引尽量使用覆盖索引
 
 6.group by和order by很类似，其实质先进行排序再进行分组，遵照索引的最左前缀法则。对于group by如果不需要排序 ，加上order by null禁止排序。注，where优先级高于having，能写在where中的限定条件就不要限定在having中。
+
+Using filesort解析
+
+filesort排序方式
+
+单路排序：一次性把满足条件的行的所有字段都拿出来，然后在sort buffer中进行排序；用trace工具可以看到sort_mode信息里显示<sort_ket,additional_fields>或<sort_ket,packed_additional_fields>。
+
+![image-20211101210349275](../image/image-20211101210349275.png)
+
+双路排序：首先找到满足条件的对应的行，然后把需要排序的字段，以及主键id拿出来，在sort buffer中进行排序，在进行回表，取出整个行的数据；用trace攻击可以看到sort_mode信息里显示<sort_key,rowid>。
+
+![image-20211101210548839](../image/image-20211101210548839.png)
+
+MySQL通过比较系统变量max_length_for_sort_data(默认1024字节)的大小和需要查询的字段总大小判断使用哪种排序模式。
+
+如果字段总长度小于max_length_for_sort_data，那么使用单路排序；
+
+如果字段总长度大于max_length_for_sort_data，那么使用双路排序。
+
+验证排序方式：
+
+```sql
+EXPLAIN SELECT * FROM employees WHERE name = 'Lilei'  ORDER BY position;
+```
+
+![image-20211101210818081](../image/image-20211101210818081.png)
+
+```sql
+set session optimizer_trace="enabled=on",end_markers_in_json=on;
+select * from employees where name = 'Lilei' order by position;
+select * from information_schema.OPTIMIZER_TRACE;
+```
+
+```json
+{
+      "join_execution": {--sql执行阶段
+        "select#": 1,
+        "steps": [
+          {
+            "filesort_information": [
+              {
+                "direction": "asc",
+                "table": "`employees`",
+                "field": "position"
+              }
+            ] /* filesort_information */,
+            "filesort_priority_queue_optimization": {
+              "usable": false,
+              "cause": "not applicable (no LIMIT)"
+            } /* filesort_priority_queue_optimization */,
+            "filesort_execution": [
+            ] /* filesort_execution */,
+            "filesort_summary": {--文件排序信息
+              "rows": 0,--预计扫描行数
+              "examined_rows": 0,--参与排序的行
+              "number_of_tmp_files": 0,--使用临时文件的个数，如果为0则是全部使用sort buffer进行排序，否则使用磁盘文件排序
+              "sort_buffer_size": 262056,--排序缓存的大小，单位byte
+              "sort_mode": "<sort_key, packed_additional_fields>"--排序方式，这里使用的是单路排序
+            } /* filesort_summary */
+          }
+        ] /* steps */
+      } /* join_execution */
+    }
+```
+
+单路排序：
+
+1.从索引中找到第一个name=‘Lilei’的条件的主键id;
+
+2.根据主键id取出整行，取出所有字段的值，存入sort buffer中；
+
+3.从索引name中找到下一个满足name=’Lilei‘的条件的主键id；
+
+4.重复2 3步骤，直到所有行都不满足name=’Lilei‘；
+
+5.对sort buffer中的数据按照position字段进行排序
+
+6.返回结果
+
+双路排序：
+
+1.从索引中找到第一个name=’Lilei‘的条件的主键id；
+
+2.根据主键id取出整行，把排序字段position和主键id的这两个字段都放到sort buffer中；
+
+3.从索引name中取下一个满足name=’Lilei‘行的主键id；
+
+4.重复2 3 步骤，知道所有行都不满足name=’Lilei‘；
+
+5.对sort buffer中的字段position和主键id按照position的方式进行排序；
+
+6.排好序的id和position，然后按照主键id在聚簇索引中取出所有剩下的字段。
+
+
+
+两种排序方式，单路排序把所有的字段都放在sort buffer中进行排序，而双路排序只会把排序字段和主键id放到sort buffer中进行排序，然后再回表取出剩下字段的顺序。
+
+MySQL排序内存sort buffer比较小，并且受制于各种条件因素没办法扩容，这时候可以考虑减小max_length_for_sort_data，让优化器选择双路排序，这样可以在sort buffer中排序更多的行，最后只需要回表取出剩下的字段。
+
+如果MySQL排序内存sort buffer比较大，这时候可以适当的配置max_length_for_sort_data大一点，让优化器选择单路排序的方式，把所有的字段都放到sort buffer中，这样排好序的数据可以直接使用。
+
+MySQL可以根据max_length_for_sort_data的大小在不同场景中灵活配置，不断提升排序的效率。
+
+需要提醒一下，虽然sort buffer中排序的效率明显高于磁盘排序的效率，但是并不意味着随意可以扩大sort buffer的大小，MySQL对很多参数都已做过优化，不要轻易进行调整。
+
+## 索引设计原则
+
+### 1.代码先行，索引后上
+
+等到主体业务功能已经开发完成，然后把涉及到该表相关sql拿出来分析以后在建立索引。
+
+### 2.联合索引尽量覆盖条件
+
+设计一个或者两三个联合索引(尽量减少单值索引)，让每一个联合索引都尽量包含SQL语句中where、order by 、group  by 的字段，还要确保这些年和索引字段的顺序尽量满足，SQL排序的最左前缀原则。
+
+### 3.不要在小基数字段上建立索引
+
+索引基数指的是表中某个字段具有不同数值的数量，假设某张表有性别字段，这个字段的索引基数应该就是2。
+
+假设对这种字段设立索引，还不如全表扫描，因为索引树中的字段只有男女两种，根本没有办法进行快速的二分查找，索引存在的意义不大。
+
+一般建立索引，通常都找那些基数比较大的字段，值比较多的字段，才能发挥B+树的作用。
+
+### 4.长字符串可以采用前缀索引
+
+尽量对字段类型比较小的字段建立索引，比如说tinyint之类的，字段比较小的话，占用的磁盘空间也会比较小，搜索时性能也会比较好。
+
+对小字段建立索引，也并非绝对，很多时候需要对varchar(255)这种字段建立索引，多点磁盘空间还是有必要的。
+
+对于varchar(255)这种字段比较占用空间，可以针对字段前20个字符建立索引，对于这个字段前20个字符建立索引，放在索引树中，类似于key index(name(20),age,position)。
+
+如果where字段搜索时，根据name搜索，先到索引树中根据name前20个字符进行搜索，定位之后前20个字符的前缀匹配成功，再回到聚簇索引中取出完整的name字段进行匹配。
+
+假如要使用order by name，此时name因为在索引树中仅仅包含前20个字符，所以排序无法用上索引，group by也是同理。
+
+### 5.where和order by冲突时，优先选择where
+
+一般情况下通常选用where条件去使用索引快速筛选出一部分指定的数据，接着在进行排序。
+
+在大多数的情况下，基于where的查询条件可以快速筛选出需要的少部分数据，做排序的成本会减小很多。
