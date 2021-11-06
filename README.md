@@ -36,5 +36,7 @@
 
 [Mysql索引优化实战](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/Mysql/Mysql索引优化实战.md)
 
+[MySQL索引优化实战二.md](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/Mysql/MySQL索引优化实战二.md)
+
 [深入理解Mysql事务隔离级别与锁机制](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/Mysql/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Mysql%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8E%E9%94%81%E6%9C%BA%E5%88%B6.md)
 
