@@ -44,13 +44,13 @@ select * from employees where id > 90000 limit 5;
 EXPLAIN select * from employees limit 90000,5;
 ```
 
-![image-20211104192539218](C:\Users\wangzhao\AppData\Roaming\Typora\typora-user-images\image-20211104192539218.png)
+![image-20211104192539218](../image/image-20211104192539218.png)
 
 ```sql
 EXPLAIN select * from employees limit 90000,5;
 ```
 
-![image-20211104192600460](C:\Users\wangzhao\AppData\Roaming\Typora\typora-user-images\image-20211104192600460.png)
+![image-20211104192600460](../image/image-20211104192600460.png)
 
 通过结果对比不难看出，选择走索引的查询语句明显比走全表的查询的行数要少，执行效率大大减少。
 
@@ -89,7 +89,7 @@ select * from employees ORDER BY name limit 90000,5;
 EXPLAIN select * from employees ORDER BY name limit 90000,5;
 ```
 
-![image-20211104194226905](C:\Users\wangzhao\AppData\Roaming\Typora\typora-user-images\image-20211104194226905.png)
+![image-20211104194226905](../image/image-20211104194226905.png)
 
 这里可以发现，extra中是Using filesort，磁盘排序。这里并没有使用索引name字段进行排序，原因大概是，MySQL认为选择索引的查询方式所消耗的成本比全表扫描消耗的成本是要高的，所以优化器放弃了使用索引。
 
@@ -111,7 +111,7 @@ select * from employees e inner join (select id from employees order by name lim
 EXPLAIN select * from employees e inner join (select id from employees order by name limit 90000,5) ed on e.id = ed.id;
 ```
 
-![image-20211104194903801](C:\Users\wangzhao\AppData\Roaming\Typora\typora-user-images\image-20211104194903801.png)
+![image-20211104194903801](../image/image-20211104194903801.png)
 
 在这里可以看出，employees表首先根据索引找到对应行并进行排序，Using index也说明了这里使用了覆盖索引，并且排序没有使用Using filesort，这时候剩下的数据就是非常少的，并且是有序的，此时，再根据id去聚簇索引中找到对应的行并提取输出全部数据，这个时候就是常量级的查找。
 
