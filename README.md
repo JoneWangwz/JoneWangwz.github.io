@@ -2,6 +2,10 @@
 
 写点笔记。简单记录一下从算法转到开发的一些学习笔记，希望能够慢慢成长。
 
+### spring
+
+[SpringBoot自动配置原理](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/spring/SpringBoot%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86.md)
+
 ### 多线程
 
 [ScheduleThreadPoolExecutor 定时任务线程池](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/ScheduleThreadPoolExecutor%20%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%BA%BF%E7%A8%8B%E6%B1%A0.md)
@@ -41,3 +45,4 @@
 [深入理解Mysql事务隔离级别与锁机制](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/Mysql/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Mysql%E4%BA%8B%E5%8A%A1%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8E%E9%94%81%E6%9C%BA%E5%88%B6.md)
 
 [深入理解MVCC与BufferPool缓存机制](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/Mysql/深入理解MVCC与BufferPool缓存机制.md)
+
