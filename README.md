@@ -6,6 +6,8 @@
 
 [SpringBoot自动配置原理](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/spring/SpringBoot%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86.md)
 
+[SpringBoot启动原理](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/spring/SpringBoot启动原理.md)
+
 ### 多线程
 
 [ScheduleThreadPoolExecutor 定时任务线程池](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/ScheduleThreadPoolExecutor%20%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E7%BA%BF%E7%A8%8B%E6%B1%A0.md)
