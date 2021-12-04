@@ -1,6 +1,6 @@
-## 一个无名程序员的成长路
+## 坚持会变成自己的想要的样子
 
-写点笔记。简单记录一下从算法转到开发的一些学习笔记，希望能够慢慢成长。
+黎明前的黑暗
 
 ### spring
 
@@ -25,6 +25,8 @@
 [Redis持久化](https://github.com/JoneWangwz/JoneWangwz.github.io/tree/main/Redis/Redis%E6%8C%81%E4%B9%85%E5%8C%96.md)
 
 [Redis主从架构](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/Redis/Redis%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84.md) 
+
+[Redis集群](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/Redis/Redis集群.md)
 
 ### JVM内存模型
 
