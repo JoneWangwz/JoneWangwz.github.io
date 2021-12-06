@@ -28,6 +28,8 @@
 
 [Redis集群](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/Redis/Redis集群.md)
 
+[Redis缓存设计与优化](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/Redis/Redis缓存设计与优化.md)
+
 ### JVM内存模型
 
 [JVM类加载机制](https://github.com/JoneWangwz/JoneWangwz.github.io/blob/main/JVM/JVM%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6.md)
